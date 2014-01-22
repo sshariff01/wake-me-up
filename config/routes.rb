@@ -1,5 +1,6 @@
 WakeMeUp::Application.routes.draw do
-  get "main/Index"
+  devise_for :subscribers
+  get "main/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
