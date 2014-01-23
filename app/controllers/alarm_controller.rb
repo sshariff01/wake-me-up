@@ -12,6 +12,7 @@ class AlarmController < ApplicationController
       @alarm.subscriber_id = p[:subscriber_id]
       @alarm.hour = p[:hour]
       @alarm.minute = p[:minute]
+      @alarm.body = p[:body]
       
       if not @alarm.save
           fail = true
@@ -41,8 +42,7 @@ class AlarmController < ApplicationController
     alarm = Alarm.find(params[:id])
     subscriber = Subscriber.find(alarm.subscriber_id)
     phone_num = subscriber.phone_number
-    message = "Jenny please?! I love you <3. This was supposed to be sent at " + alarm.hour + ":" + alarm.minute + "."
-    alarm.alert(message, phone_num)
+    alarm.alert(alarm.body, phone_num)
     redirect_to(:controller => 'alarm', :action => 'index') and return
   end
 end

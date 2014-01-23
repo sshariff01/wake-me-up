@@ -7,26 +7,27 @@
 		$('#multi-alarm').css('display', 'block');
 	};
 </script>
-<p>Always forget to set your alarm?...</p>
-<h1>Let us wake you up!</h1>
+<p>Always forgetting things?...</p>
+<h1>Let us remind you!</h1>
 
 <% if subscriber_signed_in? %>
 	<div class="specify-alarm" style="display:none;">
 		<%= form_for :alarm, url: {controller: "alarm", action: "create"} do %>
 			<div class="alarm-form">
 			</div>
-			<%= submit_tag("Set Alarm(s)") %>
+			<%= submit_tag("Set Reminder(s)") %>
 		<% end %>
 	</div>
 	<div class="specify-alarm">
-		<button id="single-alarm" onclick="showAlarmForm();">Click Here to Begin!</button>
-		<button id="multi-alarm" onclick="showAlarmForm();" style="display:none;">Add Another Alarm</button>
+		<button id="single-alarm" onclick="showAlarmForm();">Click Here to Set a Reminder!</button>
+		<button id="multi-alarm" onclick="showAlarmForm();" style="display:none;">Add Another Reminder</button>
 	</div>
 	<% if !@alarms.empty? %>
 		<div>
-			<h2>You have set the following alarms: </h2>
+			<h2>You have set the following reminders: </h2>
 			<table>
 				<% @alarms.each do |alarm| %>
+				<table>
 					<tr>
 						<td><%= alarm.hour %>:<%= alarm.minute %></td>
 						<td>
@@ -36,16 +37,23 @@
 						</td>
 						<td>
 							<%= form_for :alarm, url: {controller: "alarm", action: "send_message", id: alarm.id} do %>
-								<%= submit_tag("Test Alarm Now") %>
+								<%= submit_tag("Test Reminder Now") %>
 							<% end %>
 						</td>
 					</tr>
+				</table>
+				<table>
+					<tr>
+						<td></td>
+						<td><%= alarm.body %></td>
+					</tr>
+				</table>
 				<% end %>
 			</table>
 		</div>
 	<% else %>
 		<div>
-			<h2>You do not have any alarms set</h2>
+			<h2>You have not set any reminders set</h2>
 		</div>
 	<% end %>
 <% else %>

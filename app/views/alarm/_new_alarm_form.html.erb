@@ -13,8 +13,6 @@
 		<td>
 			<%= select_tag("alarm[][hour]", options_for_select(hours)) %>
 		</td>
-	</tr>
-	<tr>
 		<td>
 			<%= label_tag("alarm[][minute]", "Minute: ") %>
 		</td>
@@ -22,4 +20,12 @@
 			<%= select_tag("alarm[][minute]", options_for_select(minutes)) %>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<%= label_tag("alarm[][body]", "Message: ") %>
+		</td>
+		<td>
+			<%= text_area_tag("alarm[][body]") %>
+		</td>
+	</tr>	
 </table>

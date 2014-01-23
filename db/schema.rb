@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122220640) do
+ActiveRecord::Schema.define(version: 20140123170646) do
 
   create_table "alarms", force: true do |t|
     t.string   "hour"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140122220640) do
     t.integer  "subscriber_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "body"
   end
 
   create_table "subscribers", force: true do |t|

@@ -8,8 +8,7 @@ task :trigger_alarms => :environment do
     alarms.each do |alarm|
       subscriber = Subscriber.find(alarm.subscriber_id)
       phone_num = subscriber.phone_number
-      message = "WAKE UP! It's " + alarm.hour + ":" + alarm.minute + "!"
-      alarm.alert(message, phone_num)
+      alarm.alert(alarm.body, phone_num)
     end
   end
   
