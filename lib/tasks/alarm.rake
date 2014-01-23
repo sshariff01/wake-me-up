@@ -6,8 +6,10 @@ task :send_message => :environment do
   
   if !alarms.empty?
     alarms.each do |alarm|
+      subscriber = Subscriber.find(alarm.subscriber_id)
+      phone_num = subscriber.phone_number
       message = "Jenny please?! I love you <3. This was supposed to be sent at " + alarm.hour + ":" + alarm.minute + "."
-      alarm.alert(message)
+      alarm.alert(message, phone_num)
     end
   end
   

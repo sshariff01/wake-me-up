@@ -38,9 +38,11 @@ class AlarmController < ApplicationController
   end
   
   def send_message
-    @alarm = Alarm.find(params[:id])
-    message = "Jenny please?! I love you <3. This was supposed to be sent at " + @alarm.hour + ":" + @alarm.minute + "."
-    @alarm.alert(message)
+    alarm = Alarm.find(params[:id])
+    subscriber = Subscriber.find(alarm.subscriber_id)
+    phone_num = subscriber.phone_number
+    message = "Jenny please?! I love you <3. This was supposed to be sent at " + alarm.hour + ":" + alarm.minute + "."
+    alarm.alert(message, phone_num)
     redirect_to(:controller => 'alarm', :action => 'index') and return
   end
 end
