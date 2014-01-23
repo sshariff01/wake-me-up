@@ -46,3 +46,5 @@ end
 
 
 gem 'devise'
+
+gem 'protected_attributes'
