@@ -6,7 +6,7 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
   
-  <div><%= f.label :phone_number %><br />
+  <div><%= f.label :phone_number %> (The number you provide below must be a verified by Twilio. Click <a href="https://www.twilio.com/user/account/phone-numbers/incoming" target="_blank">here</a> for more information.)<br />
   <%= f.text_field :phone_number %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
