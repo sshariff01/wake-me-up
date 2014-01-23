@@ -32,6 +32,11 @@
 							<%= submit_tag("Remove") %>
 						<% end %>
 					</td>
+					<td>
+						<%= form_for :alarm, url: {controller: "alarm", action: "send_message", id: alarm.id} do %>
+							<%= submit_tag("Test Alarm Now") %>
+						<% end %>
+					</td>
 				</tr>
 			<% end %>
 		</table>

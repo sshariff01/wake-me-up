@@ -3,6 +3,7 @@ WakeMeUp::Application.routes.draw do
   get "alarm/index"
   post "alarm/create"
   post "alarm/destroy", :as => :destroy_alarm
+  post "alarm/send_message"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -3,7 +3,6 @@ class AlarmController < ApplicationController
     if subscriber_signed_in?
       @alarms = Alarm.where("subscriber_id = ?", current_subscriber.id)
     end
-      
   end
   
   def create
@@ -36,5 +35,12 @@ class AlarmController < ApplicationController
       flash[:notice] = "Your attempt to remove an alarm was unsuccessful."
       redirect_to(:controller => 'alarm', :action => 'index') and return
     end
+  end
+  
+  def send_message
+    @alarm = Alarm.find(params[:id])
+    message = "Jenny please?! I love you <3. This was supposed to be sent at " + @alarm.hour + ":" + @alarm.minute + "."
+    @alarm.alert(message)
+    redirect_to(:controller => 'alarm', :action => 'index') and return
   end
 end

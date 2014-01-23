@@ -48,3 +48,5 @@ end
 gem 'devise'
 
 gem 'protected_attributes'
+
+gem 'twilio-ruby'
