@@ -9,40 +9,46 @@
 </script>
 <p>Always forget to set your alarm?...</p>
 <h1>Let us wake you up!</h1>
-<div class="specify-alarm" style="display:none;">
-	<%= form_for :alarm, url: {controller: "alarm", action: "create"} do %>
-		<div class="alarm-form">
+
+<% if subscriber_signed_in? %>
+	<div class="specify-alarm" style="display:none;">
+		<%= form_for :alarm, url: {controller: "alarm", action: "create"} do %>
+			<div class="alarm-form">
+			</div>
+			<%= submit_tag("Set Alarm(s)") %>
+		<% end %>
+	</div>
+	<div class="specify-alarm">
+		<button id="single-alarm" onclick="showAlarmForm();">Click Here to Begin!</button>
+		<button id="multi-alarm" onclick="showAlarmForm();" style="display:none;">Add Another Alarm</button>
+	</div>
+	<% if !@alarms.empty? %>
+		<div>
+			<h2>You have set the following alarms: </h2>
+			<table>
+				<% @alarms.each do |alarm| %>
+					<tr>
+						<td><%= alarm.hour %>:<%= alarm.minute %></td>
+						<td>
+							<%= form_for :alarm, url: {controller: "alarm", action: "destroy", id: alarm.id} do %>
+								<%= submit_tag("Remove") %>
+							<% end %>
+						</td>
+						<td>
+							<%= form_for :alarm, url: {controller: "alarm", action: "send_message", id: alarm.id} do %>
+								<%= submit_tag("Test Alarm Now") %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
 		</div>
-		<%= submit_tag("Set Alarm(s)") %>
+	<% else %>
+		<div>
+			<h2>You do not have any alarms set</h2>
+		</div>
 	<% end %>
-</div>
-<div class="specify-alarm">
-	<button id="single-alarm" onclick="showAlarmForm();">Add An Alarm</button>
-	<button id="multi-alarm" onclick="showAlarmForm();" style="display:none;">Add Another Alarm</button>
-</div>
-<% if subscriber_signed_in? and !@alarms.empty? %>
-	<div>
-		<h2>You have set the following alarms: </h2>
-		<table>
-			<% @alarms.each do |alarm| %>
-				<tr>
-					<td><%= alarm.hour %>:<%= alarm.minute %></td>
-					<td>
-						<%= form_for :alarm, url: {controller: "alarm", action: "destroy", id: alarm.id} do %>
-							<%= submit_tag("Remove") %>
-						<% end %>
-					</td>
-					<td>
-						<%= form_for :alarm, url: {controller: "alarm", action: "send_message", id: alarm.id} do %>
-							<%= submit_tag("Test Alarm Now") %>
-						<% end %>
-					</td>
-				</tr>
-			<% end %>
-		</table>
-	</div>
 <% else %>
-	<div>
-		<h2>You do not have any alarms set</h2>
-	</div>
+	<h2><%= link_to "Sign Up", new_subscriber_registration_path %></h2>
+	<p>Already have an account?  <%= link_to "Sign In", new_subscriber_session_path %></p>
 <% end %>
