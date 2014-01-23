@@ -9,6 +9,6 @@ class Alarm < ActiveRecord::Base
     sms = @client.account.sms.messages.create(:body => message,
         :to => phone_num,
         :from => "+12892362295")
-    puts sms.from
+    puts "Message queued to send from " + sms.from + " to " + sms.to 
   end
 end
