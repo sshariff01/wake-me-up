@@ -7,7 +7,7 @@ class Alarm < ActiveRecord::Base
     @client = Twilio::REST::Client.new account_sid, auth_token
     
     sms = @client.account.sms.messages.create(:body => message,
-        :to => phone_num,
+        :to => "+1"+phone_num,
         :from => "+12892362295")
     puts "Message queued to send from " + sms.from + " to " + sms.to 
   end
