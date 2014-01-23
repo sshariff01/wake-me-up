@@ -10,7 +10,7 @@
 <p>Always forget to set your alarm?...</p>
 <h1>Let us wake you up!</h1>
 <div class="specify-alarm" style="display:none;">
-	<%= form_for :rate, url: {controller: "alarm", action: "create"} do %>
+	<%= form_for :alarm, url: {controller: "alarm", action: "create"} do %>
 		<div class="alarm-form">
 		</div>
 		<%= submit_tag("Set Alarm(s)") %>
