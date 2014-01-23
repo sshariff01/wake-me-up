@@ -1,0 +1,43 @@
+<script>
+	function showAlarmForm() {
+		var elem = $('.specify-alarm');
+		elem.css('display', 'block');
+		$('.alarm-form').append("<%= escape_javascript(render(:partial => "new_alarm_form")) %>")
+		$('#single-alarm').css('display', 'none');
+		$('#multi-alarm').css('display', 'block');
+	};
+</script>
+<p>Always forget to set your alarm?...</p>
+<h1>Let us wake you up!</h1>
+<div class="specify-alarm" style="display:none;">
+	<%= form_for :rate, url: {controller: "alarm", action: "create"} do %>
+		<div class="alarm-form">
+		</div>
+		<%= submit_tag("Set Alarm(s)") %>
+	<% end %>
+</div>
+<div class="specify-alarm">
+	<button id="single-alarm" onclick="showAlarmForm();">Add An Alarm</button>
+	<button id="multi-alarm" onclick="showAlarmForm();" style="display:none;">Add Another Alarm</button>
+</div>
+<% if subscriber_signed_in? and !@alarms.empty? %>
+	<div>
+		<h2>You have set the following alarms: </h2>
+		<table>
+			<% @alarms.each do |alarm| %>
+				<tr>
+					<td><%= alarm.hour %>:<%= alarm.minute %></td>
+					<td>
+						<%= form_for :alarm, url: {controller: "alarm", action: "destroy", id: alarm.id} do %>
+							<%= submit_tag("Remove") %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+<% else %>
+	<div>
+		<h2>You do not have any alarms set</h2>
+	</div>
+<% end %>

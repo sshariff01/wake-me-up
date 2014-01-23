@@ -1,12 +1,14 @@
 WakeMeUp::Application.routes.draw do
   devise_for :subscribers, controllers: {registrations: "users/registrations"}
-  get "main/index"
+  get "alarm/index"
+  post "alarm/create"
+  post "alarm/destroy", :as => :destroy_alarm
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'main#index'
+  root 'alarm#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
