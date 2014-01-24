@@ -1,31 +1,35 @@
 <table>
-	<% if subscriber_signed_in? %>
+	<table>
+		<% if subscriber_signed_in? %>
+			<tr>
+				<td>
+					<%= hidden_field_tag "alarm[][subscriber_id]", current_subscriber.id %>
+				</td>
+			</tr>
+		<% end %>
 		<tr>
 			<td>
-				<%= hidden_field_tag "alarm[][subscriber_id]", current_subscriber.id %>
+				<%= label_tag("alarm[][hour]", "Hour: ") %>
+			</td>
+			<td>
+				<%= select_tag("alarm[][hour]", options_for_select(hours)) %>
+			</td>
+			<td>
+				<%= label_tag("alarm[][minute]", "Minute: ") %>
+			</td>
+			<td>
+				<%= select_tag("alarm[][minute]", options_for_select(minutes)) %>
 			</td>
 		</tr>
-	<% end %>
-	<tr>
-		<td>
-			<%= label_tag("alarm[][hour]", "Hour: ") %>
-		</td>
-		<td>
-			<%= select_tag("alarm[][hour]", options_for_select(hours)) %>
-		</td>
-		<td>
-			<%= label_tag("alarm[][minute]", "Minute: ") %>
-		</td>
-		<td>
-			<%= select_tag("alarm[][minute]", options_for_select(minutes)) %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<%= label_tag("alarm[][body]", "Message: ") %>
-		</td>
-		<td>
-			<%= text_area_tag("alarm[][body]") %>
-		</td>
-	</tr>	
+	</table>
+	<table>
+		<tr>
+			<td>
+				<%= label_tag("alarm[][body]", "Message: ") %>
+			</td>
+			<td>
+				<%= text_area_tag("alarm[][body]") %>
+			</td>
+		</tr>	
+	</table>
 </table>
