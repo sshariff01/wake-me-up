@@ -9,6 +9,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
+	<%= link_to "Home", controller: "/alarm", action: "index" %>
+	<br />
 	<% if subscriber_signed_in? %>
 		Signed in as <%= current_subscriber.email %>. Not you?
 		<%= link_to "Sign Out", destroy_subscriber_session_path, method: :delete %>
