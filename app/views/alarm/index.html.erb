@@ -4,7 +4,7 @@
 		elem.css('display', 'block');
 		$('.alarm-form').append("<%= escape_javascript(render(:partial => "new_alarm_form")) %>")
 		$('#single-alarm').css('display', 'none');
-		$('#multi-alarm').css('display', 'block');
+		$('.multi-alarm').css('display', 'block');
 	};
 </script>
 <p>Always forgetting things?...</p>
@@ -20,7 +20,11 @@
 	</div>
 	<div class="specify-alarm">
 		<button id="single-alarm" onclick="showAlarmForm();">Click Here to Set a Reminder!</button>
-		<button id="multi-alarm" onclick="showAlarmForm();" style="display:none;">Add Another Reminder</button>
+		<div class="multi-alarm" style="display:none;">
+			<button id="multi-alarm" onclick="showAlarmForm();">Add Another Reminder</button>
+			<br />
+			<font style="font-size: 11px;">All times are set to Pacific Time (US & Canada) time zone by default</font>
+		</div>
 	</div>
 	<% if !@alarms.empty? %>
 		<div>
